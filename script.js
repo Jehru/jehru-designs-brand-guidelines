@@ -69,20 +69,31 @@ swatches.forEach((swatch) => {
   if (!hexElement) return;
 
   const hex = hexElement.textContent.trim();
+  const colorName = swatch.querySelector('h4')?.textContent?.trim() || hex;
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'swatch-copy';
   button.textContent = 'Copy';
-  button.setAttribute('aria-label', `Copy ${hex} to clipboard`);
+  swatch.setAttribute('role', 'button');
+  swatch.setAttribute('tabindex', '0');
+  swatch.setAttribute('aria-label', `Copy ${colorName} ${hex} to clipboard`);
 
-  button.addEventListener('click', async () => {
+  const triggerCopy = async () => {
     const ok = await copyText(hex);
     button.textContent = ok ? 'Copied' : 'Failed';
-    button.classList.toggle('copied', ok);
+    swatch.classList.toggle('copied', ok);
     window.setTimeout(() => {
       button.textContent = 'Copy';
-      button.classList.remove('copied');
+      swatch.classList.remove('copied');
     }, 1200);
+  };
+
+  swatch.addEventListener('click', triggerCopy);
+  swatch.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      triggerCopy();
+    }
   });
 
   swatch.appendChild(button);

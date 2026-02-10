@@ -338,6 +338,7 @@ body {
   border: var(--panel-border);
   border-radius: var(--panel-radius);
   padding: 0.75rem;
+  cursor: pointer;
 }
 
 .swatch .mono {
@@ -358,16 +359,14 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease;
-  cursor: pointer;
 }
 
 .swatch:hover .swatch-copy,
 .swatch:focus-within .swatch-copy {
   opacity: 1;
-  pointer-events: auto;
 }
 
-.swatch-copy.copied {
+.swatch.copied .swatch-copy {
   background: #f3f3f2;
 }
 
