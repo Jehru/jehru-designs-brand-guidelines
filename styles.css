@@ -117,7 +117,7 @@ body {
   position: relative;
   min-height: 100vh;
   background: var(--content-bg);
-  padding: 3.6rem clamp(1.4rem, 4vw, 4.4rem) 7rem;
+  padding: 128px clamp(1.4rem, 4vw, 4.4rem) 7rem;
 }
 
 .section {
@@ -158,10 +158,10 @@ body {
 
 .site-title {
   margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1.4;
+  font-size: 64px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   color: var(--ink);
 }
 
