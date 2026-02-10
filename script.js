@@ -44,3 +44,46 @@ if (toggle) {
     });
   });
 }
+
+const copyText = async (value) => {
+  try {
+    await navigator.clipboard.writeText(value);
+    return true;
+  } catch {
+    const area = document.createElement('textarea');
+    area.value = value;
+    area.setAttribute('readonly', '');
+    area.style.position = 'absolute';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(area);
+    return ok;
+  }
+};
+
+const swatches = Array.from(document.querySelectorAll('.swatch'));
+swatches.forEach((swatch) => {
+  const hexElement = swatch.querySelector('.mono');
+  if (!hexElement) return;
+
+  const hex = hexElement.textContent.trim();
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'swatch-copy';
+  button.textContent = 'Copy';
+  button.setAttribute('aria-label', `Copy ${hex} to clipboard`);
+
+  button.addEventListener('click', async () => {
+    const ok = await copyText(hex);
+    button.textContent = ok ? 'Copied' : 'Failed';
+    button.classList.toggle('copied', ok);
+    window.setTimeout(() => {
+      button.textContent = 'Copy';
+      button.classList.remove('copied');
+    }, 1200);
+  });
+
+  swatch.appendChild(button);
+});
