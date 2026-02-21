@@ -66,6 +66,7 @@ const copyText = async (value) => {
 const swatches = Array.from(document.querySelectorAll('.swatch'));
 swatches.forEach((swatch) => {
   const hexElement = swatch.querySelector('.mono');
+  const chipElement = swatch.querySelector('.chip');
   if (!hexElement) return;
 
   const hex = hexElement.textContent.trim();
@@ -96,5 +97,5 @@ swatches.forEach((swatch) => {
     }
   });
 
-  swatch.appendChild(button);
+  (chipElement || swatch).appendChild(button);
 });
