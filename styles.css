@@ -114,6 +114,14 @@ body {
   background: #00000006;
 }
 
+.section-nav a:focus-visible,
+.sidebar-toggle:focus-visible,
+.lockup-download:focus-visible,
+.swatch:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
 .content {
   position: relative;
   min-height: 100vh;
